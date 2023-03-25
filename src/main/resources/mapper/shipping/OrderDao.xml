@@ -4,7 +4,7 @@
 <mapper namespace="io.renren.modules.shipping.dao.OrderDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="io.renren.modules.shipping.entity.ShippingOrderEntity" id="orderMap">
+    <resultMap type="io.renren.modules.shipping.entity.po.ShippingOrderPO" id="orderMap">
         <result property="id" column="id"/>
         <result property="remark" column="remark"/>
         <result property="trackingNumber" column="tracking_number"/>

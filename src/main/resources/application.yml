@@ -77,3 +77,10 @@ renren:
     # token有效时长，7天，单位秒
     expire: 604800
     header: token
+
+#配置token生成策略
+audience:
+  clientId: 071bVwq02GvGxT06Gsp02SoPq02bVwqm
+  base64Secret: VDk4ZjSiY2Q0TjIxZDM3g9FhZGU0ZTgzQjYyM2I0KjP=
+  name: restapiuser
+  expiresSecond: 120
