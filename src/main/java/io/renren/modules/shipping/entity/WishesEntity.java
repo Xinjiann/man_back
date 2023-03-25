@@ -20,6 +20,11 @@ public class WishesEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * ID
+	 */
+	@TableId
+	private Integer id;
+	/**
 	 * 内容
 	 */
 	private String content;
@@ -30,15 +35,10 @@ public class WishesEntity implements Serializable {
 	/**
 	 * 创建者
 	 */
-	private Integer createBy;
+	private String openid;
 	/**
 	 * 删除标志
 	 */
 	private Integer deleted;
-	/**
-	 * ID
-	 */
-	@TableId
-	private Integer id;
 
 }

@@ -2,6 +2,7 @@ package io.renren.modules.shipping.controller;
 
 import java.util.Map;
 
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import io.renren.common.constant.ShippingOrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;

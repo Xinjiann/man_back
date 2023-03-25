@@ -18,5 +18,7 @@ public interface OrderService extends IService<ShippingOrderEntity> {
     PageUtils queryPage(Map<String, Object> params);
 
     PageUtils queryStatusOrderForPage(Map<String, Object> params);
+
+    void updateImage(Long id, String newFileName);
 }
 
