@@ -332,6 +332,117 @@ LOCK_NAME VARCHAR(40) NOT NULL,
 PRIMARY KEY (SCHED_NAME,LOCK_NAME))
 ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+drop table user;
+CREATE TABLE `user` (
+                        `id` int(10) Auto_Increment NOT NULL COMMENT 'ID',
+                        `openid` varchar(64) NOT NULL COMMENT 'openid',
+                        `user_name` varchar(64) NOT NULL COMMENT '名称',
+                        `phone` varchar(64) NOT NULL COMMENT '手机号',
+                        `avatar` varchar(64) NULL COMMENT '头像',
+                        `address` varchar(64) NULL COMMENT '地址',
+                        `create_time` datetime NOT NULL COMMENT '创建时间',
+                        `deleted` int(1) NOT NULL COMMENT '删除标志',
+                        `extra1` varchar(64) NULL COMMENT 'extra1',
+                        `extra2` varchar(64) NULL COMMENT 'extra2',
+                        `extra3` varchar(64) NULL COMMENT 'extra3',
+                        PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户';
+
+drop table shipping_order;
+create table shipping_order (
+                                `id` int(10) Auto_Increment NOT NULL COMMENT 'ID',
+                                `remark`          varchar(256)  null comment '描述',
+                                `tracking_number` varchar(64)   not null comment '快递单号',
+                                `address`         varchar(256)  not null comment '地址',
+                                `openid`          varchar(64)   not null comment '创建者',
+                                `create_time`     datetime      null comment '创建时间',
+                                `price`           decimal(9, 2) null comment '金额',
+                                `order_number`    varchar(64)   null comment '国际单号',
+                                `image`           varchar(64)   null comment '图片key',
+                                `status`        int(1)        not null comment '订单状态',
+                                `deleted`         int(1)        not null comment '删除标志',
+                                PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='物流订单';
+
+drop table wishes;
+create table wishes
+(
+    `id`        int(10)  Auto_Increment NOT NULL COMMENT 'ID',
+    `content`   varchar(256) not null comment '内容',
+    `create_time` datetime   not null comment '创建时间',
+    `openid`          varchar(64)   not null comment '创建者',
+    `deleted`         int(1)        not null comment '删除标志',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='心愿单';
+
+# drop table shipping_user_order_relation;
+# CREATE TABLE `shipping_user_order_relation` (
+                                                  #      `id` int(10) Auto_Increment NOT NULL COMMENT 'ID',
+                                                  #      `customer_id` int(10) NOT NULL COMMENT '陪玩者ID',
+                                                  #      `order_id` int(10) NOT NULL COMMENT '用户ID',
+                                                  #      `create_time` datetime NOT NULL COMMENT '创建时间',
+                                                  #      `delete` int(1) NOT NULL COMMENT '删除标志',
+                                                  #      PRIMARY KEY (`id`)
+                                                      # ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='物流客户订单关系表';
+
+# drop table companion_playmate;
+CREATE TABLE `companion_playmate` (
+                                      `id`    int(10) Auto_Increment NOT NULL COMMENT 'ID',
+                                      `name` varchar(64) NOT NULL COMMENT '名称',
+                                      `info` varchar(128) NOT NULL COMMENT '详情',
+                                      `order_times` int(10) NULL Default  0 COMMENT '接单数量',
+                                      `likes` int(10) NULL DEFAULT 0 COMMENT '点赞数',
+                                      `create_time` datetime NOT NULL COMMENT '创建时间',
+                                      `delete` int(1) NOT NULL COMMENT '删除标志',
+                                      PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='陪玩表';
+
+# drop table companion_games;
+CREATE TABLE `companion_games` (
+                                   `id` int(10) Auto_Increment NOT NULL COMMENT 'ID',
+                                   `name` varchar(64) NOT NULL COMMENT '名称',
+                                   `create_time` datetime NOT NULL COMMENT '创建时间',
+                                   `modify_time` datetime NOT NULL COMMENT '修改时间',
+                                   `delete` int(1) NOT NULL COMMENT '删除标志',
+                                   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='游戏表';
+
+# drop table companion_playmate_games_relation;
+CREATE TABLE `companion_playmate_games_relation` (
+                                                     `id` int(10) Auto_Increment NOT NULL COMMENT 'ID',
+                                                     `playmate_id` int(10) NOT NULL COMMENT '陪玩者ID',
+                                                     `game_id` int(10) NOT NULL COMMENT '游戏ID',
+                                                     `price` decimal(9,2) NOT NULL COMMENT '价格/h',
+                                                     `create_time` datetime NOT NULL COMMENT '创建时间',
+                                                     `delete` int(1) NOT NULL COMMENT '删除标志',
+                                                     PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='陪玩游戏关系表';
+
+# drop table companion_order;
+CREATE TABLE `companion_order` (
+                                   `id` int(10) Auto_Increment NOT NULL COMMENT 'ID',
+                                   `user` varchar(64) NOT NULL COMMENT 'openid',
+                                   `playmate` int(10) NOT NULL COMMENT 'playmate id',
+                                   `game` int(10) NOT NULL COMMENT 'game id',
+                                   `order_status` int(1) NOT NULL COMMENT '订单状态',
+                                   `period` int(10) NOT NULL COMMENT '总时间',
+                                   `amount` decimal(9,2) NOT NULL COMMENT '总价格',
+                                   `create_time` datetime NOT NULL COMMENT '下单时间',
+                                   `delete` int(1) NOT NULL COMMENT '删除标志',
+                                   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单表';
+
+# drop table companion_review;
+CREATE TABLE `companion_review` (
+                                    `id` int(10) Auto_Increment NOT NULL COMMENT 'ID',
+                                    `user` varchar(64) NOT NULL COMMENT 'openid',
+                                    `playmate` int(10) NOT NULL COMMENT 'playmate id',
+                                    `rating` int(10) NOT NULL COMMENT '分数',
+                                    `comment` varchar(64) NULL COMMENT '平均',
+                                    `delete` int(1) NOT NULL COMMENT '删除标志',
+                                    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评价表';
+
 CREATE INDEX IDX_QRTZ_J_REQ_RECOVERY ON QRTZ_JOB_DETAILS(SCHED_NAME,REQUESTS_RECOVERY);
 CREATE INDEX IDX_QRTZ_J_GRP ON QRTZ_JOB_DETAILS(SCHED_NAME,JOB_GROUP);
 
